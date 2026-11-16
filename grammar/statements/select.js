@@ -59,7 +59,9 @@ export default {
 
   _select_statement: $ => optional_parenthesis($._select_body),
 
-  _select_body: $ => seq(
+  // Right associative so that `SELECT 1 FROM t` is never read as `SELECT 1`
+  // followed by a separate `FROM t` pipe query.
+  _select_body: $ => prec.right(seq(
       $.select,
       optional(
         seq(
@@ -68,7 +70,7 @@ export default {
         ),
       ),
       optional($.from),
-  ),
+  )),
 
   select: $ => seq(
     $.keyword_select,

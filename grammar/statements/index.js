@@ -13,6 +13,7 @@ import update_rules from "./update.js";
 import truncate_rules from "./truncate.js";
 import copy_rules from "./copy.js";
 import select_rules from "./select.js";
+import pipe_rules from "./pipe.js";
 import set_rules from "./set.js";
 import refresh_rules from "./refresh.js";
 import privilege_rules from "./privileges.js";
@@ -126,6 +127,7 @@ export default {
       choice(
         $._select_statement,
         $.set_operation,
+        $._pipe_query,
         $._show_statement,
         $._unload_statement,
       ),
@@ -133,6 +135,7 @@ export default {
   ),
 
   ...select_rules,
+  ...pipe_rules,
   ...set_rules,
 
   _show_statement: $ => seq(
@@ -160,11 +163,11 @@ export default {
     $.object_reference
   ),
 
-  _show_tables: $ => seq(
+  _show_tables: $ => prec.right(seq(
     $.keyword_tables,
     optional(seq($.keyword_from, $._qualified_field)),
     optional(seq($.keyword_like, $._expression))
-  ),
+  )),
 
   // athena
   _unload_statement: $ => seq(

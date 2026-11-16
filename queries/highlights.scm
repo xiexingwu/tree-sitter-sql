@@ -196,6 +196,8 @@
   (keyword_data)
   (keyword_type)
   (keyword_rename)
+  (keyword_extend)
+  (keyword_aggregate)
   (keyword_refresh)
   (keyword_to)
   (keyword_schema)
@@ -476,6 +478,7 @@
   ">="
   ">"
   "<>"
+  "|>"
   (op_other)
   (op_unary_other)
 ] @operator

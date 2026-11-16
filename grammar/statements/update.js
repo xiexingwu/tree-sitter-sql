@@ -25,7 +25,7 @@ export default {
     ),
   ),
 
-  _postgres_update_statement: $ => prec(1,
+  _postgres_update_statement: $ => prec.right(1,
     seq(
       $.relation,
       $._set_values,

@@ -386,7 +386,7 @@ export default {
     // the inner SELECT is a scalar subquery.
     seq(
       optional($._cte),
-      choice($._select_body, $.set_operation, $._show_statement, $._unload_statement),
+      choice($._select_body, $.set_operation, $._pipe_query, $._show_statement, $._unload_statement),
     ),
     wrapped_in_parenthesis($._subquery_body),
   ),
